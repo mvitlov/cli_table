@@ -40,15 +40,7 @@ void main() {
 }
 ```
 
-```
-┌──────────┬────────────────────┬────────────────────┬────────────────────┐
-│ Rel      │ Change             │ By                 │ When               │
-├──────────┼────────────────────┼────────────────────┼────────────────────┤
-│ v0.1     │ First test         │ someone@gmail.com  │ 9 minutes ago      │
-├──────────┼────────────────────┼────────────────────┼────────────────────┤
-│ v0.1     │ Second test        │ other@gmail.com    │ 13 minutes ago     │
-└──────────┴────────────────────┴────────────────────┴────────────────────┘
-```
+![cli_table_preview2](https://raw.githubusercontent.com/mvitlov/cli_table/main/media/basic_example.png)
 
 ## Table types and layouts
 
@@ -65,16 +57,9 @@ table.addAll([
 ]);
 
 print(table.toString());
-// Outputs:
-//
-// ┌───────┬────────┐
-// │ Index │ Name   │
-// ├───────┼────────┤
-// │ 1.    │ First  │
-// ├───────┼────────┤
-// │ 2.    │ Second │
-// └───────┴────────┘
 ```
+
+![cli_table_preview2](https://raw.githubusercontent.com/mvitlov/cli_table/main/media/horizontal_table.png)
 
 ### Vertical tables
 
@@ -87,14 +72,9 @@ table.addAll([
 ]);
 
 print(table.toString());
-// Outputs:
-//
-// ┌─────────────┬───────────────┐
-// │ Some key    │ Some value    │
-// ├─────────────┼───────────────┤
-// │ Another key │ Another value │
-// └─────────────┴───────────────┘
 ```
+
+![cli_table_preview2](https://raw.githubusercontent.com/mvitlov/cli_table/main/media/vertical_table.png)
 
 ### Cross tables
 
@@ -116,16 +96,9 @@ table.addAll([
 ]);
 
 print(table.toString());
-// Outputs:
-//
-// ┌───────────────┬───────────────────┬───────────────────┐
-// │               │ Top Header 1      │ Top Header 2      │
-// ├───────────────┼───────────────────┼───────────────────┤
-// │ Left Header 1 │ Value Row 1 Col 1 │ Value Row 1 Col 2 │
-// ├───────────────┼───────────────────┼───────────────────┤
-// │ Left Header 2 │ Value Row 2 Col 1 │ Value Row 2 Col 2 │
-// └───────────────┴───────────────────┴───────────────────┘
 ```
+
+![cli_table_preview2](https://raw.githubusercontent.com/mvitlov/cli_table/main/media/cross_table.png)
 
 ## Other usage examples with different table options
 
@@ -151,15 +124,9 @@ table.addAll([
 ]);
 
 print(table.toString());
-// Outputs:
-//
-// ┌───────┬─────────┬───────────────────┬──────────────┐
-// │ Hello │ I am    │ Words that exceed │ Text is only │
-// │ how   │ fine    │ the colWidth will │ wrapped for  │
-// │ are   │ thanks! │ be truncated.     │ fixed width  │
-// │ you?  │ Looooo… │                   │ columns.     │
-// └───────┴─────────┴───────────────────┴──────────────┘
 ```
+
+![cli_table_preview2](https://raw.githubusercontent.com/mvitlov/cli_table/main/media/wrap_text.png)
 
 ### Use `columnSpan` to span columns
 
@@ -171,16 +138,9 @@ table.addAll([
   [{'colSpan': 2, 'content': 'Second'}],
   ['Third', 'Fourth']
 ]);
-// Outputs:
-//
-// ┌────────────────┐
-// │ First          │
-// ├────────────────┤
-// │ Second         │
-// ├───────┬────────┤
-// │ Third │ Fourth │
-// └───────┴────────┘
 ```
+
+![cli_table_preview2](https://raw.githubusercontent.com/mvitlov/cli_table/main/media/column_span.png)
 
 ### Use `rowSpan` to span rows
 
@@ -195,17 +155,12 @@ table.addAll([
   ],
   ['howdy']
 ]);
-// Outputs:
-//
-// ┌───────┬────────┬────────┐
-// │ First │        │ Third  │
-// │       │ Second ├────────┤
-// │       │        │ Fourth │
-// └───────┴────────┴────────┘
 ```
+![cli_table_preview2](https://raw.githubusercontent.com/mvitlov/cli_table/main/media/row_span.png)
 
 
 ## Credits
+
 - [Automattic/cli-table](https://github.com/Automattic/cli-table)
 - [jamestalmage/cli-table2](https://github.com/jamestalmage/cli-table2)
 - [cli-table/cli-table3](https://github.com/cli-table/cli-table3)
