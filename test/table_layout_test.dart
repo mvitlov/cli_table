@@ -313,7 +313,13 @@ void main() {
 
     group('computeWidths', () {
       ICell mc(y, x, [desiredWidth, colSpan]) {
-        return Cell()..addAll({'x': x, 'y': y, 'desiredWidth': desiredWidth, 'colSpan': colSpan});
+        return Cell()
+          ..addAll({
+            'x': x,
+            'y': y,
+            'desiredWidth': desiredWidth,
+            'colSpan': colSpan
+          });
       }
 
       test('finds the maximum desired width of each column', () {
@@ -399,7 +405,8 @@ void main() {
         expect(widths, [7, 3, 8]);
       });
 
-      test('spans will only edit uneditable tables - first column uneditable', () {
+      test('spans will only edit uneditable tables - first column uneditable',
+          () {
         final cells = [
           [mc(0, 0, 20, 3)],
           [mc(1, 0, 4), mc(1, 1, 3), mc(1, 2, 5)]
@@ -411,7 +418,13 @@ void main() {
 
     group('computeHeights', () {
       ICell mc(y, x, [desiredHeight, colSpan]) {
-        return Cell()..addAll({'x': x, 'y': y, 'desiredHeight': desiredHeight, 'rowSpan': colSpan});
+        return Cell()
+          ..addAll({
+            'x': x,
+            'y': y,
+            'desiredHeight': desiredHeight,
+            'rowSpan': colSpan
+          });
       }
 
       test('finds the maximum desired height of each row', () {
@@ -543,7 +556,9 @@ void checkExpectation(ICell actualCell, dynamic expected, x, y, actualTable) {
     expect(actualCell, isA<RowSpanCell>());
     expect((actualCell as RowSpanCell).originalCell, isA<Cell>());
     expect(
-        actualCell.originalCell, findCell(actualTable, expectedCell['spannerFor'][1], expectedCell['spannerFor'][0]));
+        actualCell.originalCell,
+        findCell(actualTable, expectedCell['spannerFor'][1],
+            expectedCell['spannerFor'][0]));
     // retest here x,y coords
   }
 }

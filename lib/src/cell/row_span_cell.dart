@@ -12,7 +12,8 @@ class RowSpanCell extends ICell {
     var y = this['y'];
     var originalY = originalCell['y'];
     this['cellOffset'] = y - originalY;
-    this['offset'] = findDimension(tableOptions['rowHeights'], originalY, this['cellOffset']);
+    this['offset'] = findDimension(
+        tableOptions['rowHeights'], originalY, this['cellOffset']);
   }
 
   @override

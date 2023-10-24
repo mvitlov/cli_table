@@ -115,7 +115,8 @@ void _addColSpanCells(List<List<ICell>> cellRows) {
         var colSpanCell = ColSpanCell();
         colSpanCell['x'] = cell['x'] + k;
         colSpanCell['y'] = cell['y'];
-        cellColumns.replaceRange(columnIndex + 1, columnIndex + 1, [colSpanCell]);
+        cellColumns
+            .replaceRange(columnIndex + 1, columnIndex + 1, [colSpanCell]);
       }
     }
   }
@@ -145,7 +146,8 @@ void fillInTable(List<List<ICell>> table) {
           x++;
         }
         var y2 = y + 1;
-        while (y2 < hMax && _allBlank(table, y2, opts['x'], opts['x']! + opts['colSpan']!)) {
+        while (y2 < hMax &&
+            _allBlank(table, y2, opts['x'], opts['x']! + opts['colSpan']!)) {
           opts['rowSpan'] = opts['rowSpan']! + 1;
           y2++;
         }
@@ -201,8 +203,8 @@ List<int> Function(List<int?>, List<List<ICell>>) makeComputeWidths(
         if ((cell[colSpan] ?? 1) > 1) {
           spanners.add(cell);
         } else {
-          var res =
-              math.max<int>(result.elementAtOrNull(cell[x]) ?? 0, math.max<int>(cell[desiredWidth] ?? 0, forcedMin));
+          var res = math.max<int>(result.elementAtOrNull(cell[x]) ?? 0,
+              math.max<int>(cell[desiredWidth] ?? 0, forcedMin));
 
           try {
             result[cell[x]] = res;
@@ -239,7 +241,8 @@ List<int> Function(List<int?>, List<List<ICell>>) makeComputeWidths(
           }
         }
       } else {
-        existingWidth = desiredWidth == 'desiredWidth' ? cell['desiredWidth'] - 1 : 1;
+        existingWidth =
+            desiredWidth == 'desiredWidth' ? cell['desiredWidth'] - 1 : 1;
         if (auto[col] == null || auto[col] == 0 || auto[col] < existingWidth) {
           auto[col] = existingWidth;
         }
@@ -249,7 +252,9 @@ List<int> Function(List<int?>, List<List<ICell>>) makeComputeWidths(
         var i = 0;
         while (editableCols > 0 && cell[desiredWidth] > existingWidth) {
           if (vals.elementAtOrNull(col + i) is! int) {
-            var dif = (((cell[desiredWidth] as int) - existingWidth!) / editableCols).round();
+            var dif =
+                (((cell[desiredWidth] as int) - existingWidth!) / editableCols)
+                    .round();
             existingWidth += dif;
             result[col + i] = result[col + i]! + dif;
             editableCols--;

@@ -15,12 +15,19 @@ void main() {
         ),
       );
 
-      final expected = ['┌──────┬───┐', '│ Test │ 1 │', '│      │ 2 │', '│      │ 3 │', '└──────┴───┘'];
+      final expected = [
+        '┌──────┬───┐',
+        '│ Test │ 1 │',
+        '│      │ 2 │',
+        '│      │ 3 │',
+        '└──────┴───┘'
+      ];
 
       expect(table.toString(), expected.join('\n'));
     });
 
-    test('test column width is accurately reflected when newlines are present', () {
+    test('test column width is accurately reflected when newlines are present',
+        () {
       final table = Table(header: ['Test\nWidth'], style: TableStyle.noColor());
       expect(table.width, 9);
     });
@@ -32,7 +39,13 @@ void main() {
         ['something\nwith\nnewlines']
       ]);
 
-      final expected = ['┌───────────┐', '│ something │', '│ with      │', '│ newlines  │', '└───────────┘'];
+      final expected = [
+        '┌───────────┐',
+        '│ something │',
+        '│ with      │',
+        '│ newlines  │',
+        '└───────────┘'
+      ];
 
       expect(table.toString(), expected.join('\n'));
     });
@@ -51,7 +64,12 @@ void main() {
         {'v\n0.1': 'Testing\nsomething cool'}
       ]);
 
-      final expected = ['┌───┬──────────────┐', '│v  │Testing       │', '│0.1│something cool│', '└───┴──────────────┘'];
+      final expected = [
+        '┌───┬──────────────┐',
+        '│v  │Testing       │',
+        '│0.1│something cool│',
+        '└───┴──────────────┘'
+      ];
 
       expect(table.toString(), expected.join('\n'));
     });

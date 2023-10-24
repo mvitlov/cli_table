@@ -50,7 +50,8 @@ class Cell extends ICell {
     } else if (content == null) {
       this['content'] = this['options']['href'] ?? '';
     } else {
-      throw Exception('Content needs to be a primitive, got: ${content.runtimeType}');
+      throw Exception(
+          'Content needs to be a primitive, got: ${content.runtimeType}');
     }
     this['colSpan'] = options['colSpan'] ?? 1;
     this['rowSpan'] = options['rowSpan'] ?? 1;
@@ -80,11 +81,13 @@ class Cell extends ICell {
     this['head'] = style?['head'] ?? tableStyle['head'];
     this['border'] = style?['border'] ?? tableStyle['border'];
 
-    this['fixedWidth'] = (tableOptions['colWidths'] as List).elementAtOrNull(this['x'] ?? 0);
+    this['fixedWidth'] =
+        (tableOptions['colWidths'] as List).elementAtOrNull(this['x'] ?? 0);
     this['lines'] = computeLines(tableOptions);
 
-    this['desiredWidth'] =
-        utils.strlen(this['content']) + (this['paddingLeft'] as int? ?? 0) + (this['paddingRight'] as int? ?? 0);
+    this['desiredWidth'] = utils.strlen(this['content']) +
+        (this['paddingLeft'] as int? ?? 0) +
+        (this['paddingRight'] as int? ?? 0);
     this['desiredHeight'] = this['lines'].length;
   }
 
@@ -96,14 +99,18 @@ class Cell extends ICell {
       if (this['colSpan'] != 0) {
         var i = 1;
         while (i < this['colSpan']) {
-          this['fixedWidth'] = this['fixedWidth']! + (tableOptions['colWidths'][this['x'] + i] as int? ?? 0);
+          this['fixedWidth'] = this['fixedWidth']! +
+              (tableOptions['colWidths'][this['x'] + i] as int? ?? 0);
           i++;
         }
       }
-      final bool tableWrapOnWordBoundary = tableOptions['wrapOnWordBoundary'] ?? true;
-      final bool wrapOnWordBoundary = this['options']['wrapOnWordBoundary'] ?? tableWrapOnWordBoundary;
+      final bool tableWrapOnWordBoundary =
+          tableOptions['wrapOnWordBoundary'] ?? true;
+      final bool wrapOnWordBoundary =
+          this['options']['wrapOnWordBoundary'] ?? tableWrapOnWordBoundary;
 
-      final wrapped = utils.wordWrap(this['fixedWidth']!, this['content'], wrapOnWordBoundary);
+      final wrapped = utils.wordWrap(
+          this['fixedWidth']!, this['content'], wrapOnWordBoundary);
       return wrapLines(wrapped);
     }
     return wrapLines(this['content'].split('\n'));
@@ -127,26 +134,31 @@ class Cell extends ICell {
   void init(Map<String, dynamic> tableOptions) {
     var x = this['x'];
     var y = this['y'];
-    this['widths'] =
-        tableOptions['colWidths'].isEmpty ? <int>[] : tableOptions['colWidths'].sublist(x, x + this['colSpan']);
-    this['heights'] =
-        tableOptions['rowHeights'].isEmpty ? <int>[] : tableOptions['rowHeights'].sublist(y, y + this['rowSpan']);
+    this['widths'] = tableOptions['colWidths'].isEmpty
+        ? <int>[]
+        : tableOptions['colWidths'].sublist(x, x + this['colSpan']);
+    this['heights'] = tableOptions['rowHeights'].isEmpty
+        ? <int>[]
+        : tableOptions['rowHeights'].sublist(y, y + this['rowSpan']);
     this['width'] = (this['widths'] as List<int>).fold<int>(-1, sumPlusOne);
     this['height'] = (this['heights'] as List<int>).fold<int>(-1, sumPlusOne);
 
     try {
-      this['hAlign'] = this['options']['hAlign'] ?? tableOptions['colAligns'][x];
+      this['hAlign'] =
+          this['options']['hAlign'] ?? tableOptions['colAligns'][x];
     } catch (_) {
       //
     }
 
     try {
-      this['vAlign'] = this['options']['vAlign'] ?? tableOptions['rowAligns'][y];
+      this['vAlign'] =
+          this['options']['vAlign'] ?? tableOptions['rowAligns'][y];
     } catch (_) {
       //
     }
 
-    this['drawRight'] = (x ?? 0) + this['colSpan'] == tableOptions['colWidths'].length;
+    this['drawRight'] =
+        (x ?? 0) + this['colSpan'] == tableOptions['colWidths'].length;
   }
 
   /// Draws the given line of the cell.
@@ -157,7 +169,8 @@ class Cell extends ICell {
     if (lineNum == 'top') return drawTop(this['drawRight']);
     if (lineNum == 'bottom') return drawBottom(this['drawRight']);
 
-    var padLen = math.max<int>((this['height'] as int) - this['lines'].length as int, 0);
+    var padLen =
+        math.max<int>((this['height'] as int) - this['lines'].length as int, 0);
     late int padTop;
     switch (this['vAlign']?.name) {
       case 'center':
@@ -172,8 +185,10 @@ class Cell extends ICell {
     if (lineNum < padTop || lineNum >= padTop + this['lines'].length) {
       return drawEmpty(this['drawRight'], spanningCell);
     }
-    var forceTruncation = this['lines'].length > this['height'] && lineNum + 1 >= this['height'];
-    return drawLine(lineNum - padTop, this['drawRight'], forceTruncation, spanningCell);
+    var forceTruncation =
+        this['lines'].length > this['height'] && lineNum + 1 >= this['height'];
+    return drawLine(
+        lineNum - padTop, this['drawRight'], forceTruncation, spanningCell);
   }
 
   /// Renders the top line of the cell.
@@ -187,11 +202,13 @@ class Cell extends ICell {
       for (var width in (this['widths'] as List<int>)) {
         index++;
         content.add(_topLeftChar(index));
-        content.add(utils.repeat(this['chars'][this['y'] == 0 ? 'top' : 'mid']!, width));
+        content.add(utils.repeat(
+            this['chars'][this['y'] == 0 ? 'top' : 'mid']!, width));
       }
     } else {
       content.add(_topLeftChar(0));
-      content.add(utils.repeat(this['chars'][this['y'] == 0 ? 'top' : 'mid']!, this['width']));
+      content.add(utils.repeat(
+          this['chars'][this['y'] == 0 ? 'top' : 'mid']!, this['width']));
     }
     if (drawRight) {
       content.add(this['chars'][this['y'] == 0 ? 'topRight' : 'rightMid']);
@@ -215,7 +232,8 @@ class Cell extends ICell {
         leftChar = offset == 0 ? 'midMid' : 'bottomMid';
         if (this['cells'] != null) {
           // Cells should always exist - some tests don't fill it in though
-          var spanAbove = (this['cells'][this['y'] - 1] as List).elementAtOrNull(x) is ColSpanCell;
+          var spanAbove = (this['cells'][this['y'] - 1] as List)
+              .elementAtOrNull(x) is ColSpanCell;
           if (spanAbove) {
             leftChar = offset == 0 ? 'topMid' : 'mid';
           }
@@ -260,7 +278,8 @@ class Cell extends ICell {
   /// only include the truncation symbol if the text will not fit horizontally within the cell width.
   /// @param spanningCell - a number of if being called from a RowSpanCell. (how many rows below). otherwise undefined.
   /// @returns {String}
-  String drawLine(lineNum, bool? drawRight, bool forceTruncationSymbol, spanningCell) {
+  String drawLine(
+      lineNum, bool? drawRight, bool forceTruncationSymbol, spanningCell) {
     drawRight ??= false;
     var left = this['chars'][this['x'] == 0 ? 'left' : 'middle']!;
     if (this['x'] != 0 && spanningCell != null && this['cells'] != null) {
@@ -331,14 +350,16 @@ class Cell extends ICell {
 }
 
 // HELPER FUNCTIONS
-dynamic firstDefined(List<dynamic> args) => args.firstWhere((v) => v != null, orElse: () => null);
+dynamic firstDefined(List<dynamic> args) =>
+    args.firstWhere((v) => v != null, orElse: () => null);
 
 void setOption(Map? objA, Map objB, String nameB, Map targetObj) {
   var nameAsplit = nameB.split('-');
   if (nameAsplit.length > 1) {
     nameAsplit[1] = nameAsplit[1][0].toUpperCase() + nameAsplit[1].substring(1);
     var nameA = nameAsplit.join('');
-    targetObj[nameA] = firstDefined([objA?[nameA], objA?[nameB], objB[nameA], objB[nameB]]);
+    targetObj[nameA] =
+        firstDefined([objA?[nameA], objA?[nameB], objB[nameA], objB[nameB]]);
   } else {
     targetObj[nameB] = firstDefined([objA?[nameB], objB[nameB]]);
   }

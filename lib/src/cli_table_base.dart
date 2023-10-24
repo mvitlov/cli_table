@@ -109,9 +109,12 @@ class Table extends ListBase<dynamic> {
 
     for (var rowIndex = 0; rowIndex < cells.length; rowIndex++) {
       var row = cells[rowIndex];
-      var heightOfRow = options['rowHeights'].isEmpty ? 0 : options['rowHeights'][rowIndex];
+      var heightOfRow =
+          options['rowHeights'].isEmpty ? 0 : options['rowHeights'][rowIndex];
 
-      if (rowIndex == 0 || !options['style']['compact'] || (rowIndex == 1 && headersPresent)) {
+      if (rowIndex == 0 ||
+          !options['style']['compact'] ||
+          (rowIndex == 1 && headersPresent)) {
         _doDraw(row, 'top', result);
       }
 

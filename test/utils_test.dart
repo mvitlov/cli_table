@@ -118,7 +118,8 @@ void main() {
       });
 
       test('pad red(hello)', () {
-        expect(pad(chalk.red('hello'), 7, ' ', 'right'), "  ${chalk.red("hello")}");
+        expect(pad(chalk.red('hello'), 7, ' ', 'right'),
+            "  ${chalk.red("hello")}");
       });
 
       test("pad('hello', 2, ' ', right) == 'hello'", () {
@@ -143,18 +144,24 @@ void main() {
         expect(truncate('goodnight moon', 8, '…'), 'goodnig…');
       });
 
-      test('truncate(colors.zebra("goodnight moon"), 15, "…") == colors.zebra("goodnight moon")', () {
+      test(
+          'truncate(colors.zebra("goodnight moon"), 15, "…") == colors.zebra("goodnight moon")',
+          () {
         var original = zebra('goodnight moon');
         expect(truncate(original, 15, '…'), original);
       });
 
-      test('truncate(colors.zebra("goodnight moon"), 8, "…") == colors.zebra("goodnig") + "…"', () {
+      test(
+          'truncate(colors.zebra("goodnight moon"), 8, "…") == colors.zebra("goodnig") + "…"',
+          () {
         var original = zebra('goodnight moon');
         var expected = '${zebra('goodnig')}…';
         expect(truncate(original, 8, '…'), expected);
       });
 
-      test('truncate(colors.zebra("goodnight moon"), 9, "…") == colors.zebra("goodnig") + "…"', () {
+      test(
+          'truncate(colors.zebra("goodnight moon"), 9, "…") == colors.zebra("goodnig") + "…"',
+          () {
         var original = zebra('goodnight moon');
         var expected = '${zebra('goodnigh')}…';
         expect(truncate(original, 9, '…'), expected);
@@ -166,13 +173,17 @@ void main() {
         expect(truncate(original, 9), expected);
       });
 
-      test('red-on-green(hello) + green-on-red(world) truncated to 9 chars', () {
+      test('red-on-green(hello) + green-on-red(world) truncated to 9 chars',
+          () {
         var original = chalk.red.bgGreen('hello') + chalk.green.bgRed(' world');
-        var expected = '${chalk.red.bgGreen('hello')}${chalk.green.bgRed(' wo')}…';
+        var expected =
+            '${chalk.red.bgGreen('hello')}${chalk.green.bgRed(' wo')}…';
         expect(truncate(original, 9), expected);
       });
 
-      test('red-on-green(hello) + green-on-red(world) truncated to 10 chars - using inverse', () {
+      test(
+          'red-on-green(hello) + green-on-red(world) truncated to 10 chars - using inverse',
+          () {
         var original = chalk.red.bgGreen('hello${chalk.inverse(' world')}');
         var expected = '${chalk.red.bgGreen('hello${chalk.inverse(' wor')}')}…';
         expect(truncate(original, 10), expected);
@@ -321,7 +332,8 @@ void main() {
       test('words longer than limit will not create extra newlines', () {
         var input = 'disestablishment is a multiplicity someotherlongword';
 
-        var expected = 'disestablishment\nis a\nmultiplicity\nsomeotherlongword';
+        var expected =
+            'disestablishment\nis a\nmultiplicity\nsomeotherlongword';
 
         expect(wordWrap(7, input).join('\n'), expected);
       });
@@ -353,8 +365,10 @@ void main() {
 
       group('textWrap', () {
         test('wraps long words', () {
-          expect(wordWrap(10, 'abcdefghijklmnopqrstuvwxyz', false), ['abcdefghij', 'klmnopqrst', 'uvwxyz']);
-          expect(wordWrap(10, 'abcdefghijk lmnopqrstuv wxyz', false), ['abcdefghij', 'k lmnopqrs', 'tuv wxyz']);
+          expect(wordWrap(10, 'abcdefghijklmnopqrstuvwxyz', false),
+              ['abcdefghij', 'klmnopqrst', 'uvwxyz']);
+          expect(wordWrap(10, 'abcdefghijk lmnopqrstuv wxyz', false),
+              ['abcdefghij', 'k lmnopqrs', 'tuv wxyz']);
           expect(wordWrap(10, 'ab cdefghijk lmnopqrstuv wx yz', false), [
             'ab cdefghi',
             'jk lmnopqr',
@@ -380,10 +394,13 @@ void main() {
       test('styles will continue on each line', () {
         var input = chalk.underline('Hello\nHi').split('\n');
 
-        expect(colorizeLines(input), [chalk.underline('Hello'), chalk.underline('Hi')]);
+        expect(colorizeLines(input),
+            [chalk.underline('Hello'), chalk.underline('Hi')]);
       });
 
-      test('styles that end before the break will not be applied to the next line', () {
+      test(
+          'styles that end before the break will not be applied to the next line',
+          () {
         var input = ('${chalk.underline('Hello')}\nHi').split('\n');
 
         expect(colorizeLines(input), [chalk.underline('Hello'), 'Hi']);
@@ -396,17 +413,20 @@ void main() {
 
       test('handles aixterm 16-color foreground', () {
         var input = '\x1b[90mHello\nHi\x1b[0m'.split('\n');
-        expect(colorizeLines(input), ['\x1b[90mHello\x1b[39m', '\x1b[90mHi\x1b[0m']);
+        expect(colorizeLines(input),
+            ['\x1b[90mHello\x1b[39m', '\x1b[90mHi\x1b[0m']);
       });
 
       test('handles aixterm 16-color background', () {
         var input = '\x1b[100mHello\nHi\x1b[m\nHowdy'.split('\n');
-        expect(colorizeLines(input), ['\x1b[100mHello\x1b[49m', '\x1b[100mHi\x1b[m', 'Howdy']);
+        expect(colorizeLines(input),
+            ['\x1b[100mHello\x1b[49m', '\x1b[100mHi\x1b[m', 'Howdy']);
       });
 
       test('handles aixterm 256-color foreground', () {
         var input = '\x1b[48;5;8mHello\nHi\x1b[0m\nHowdy'.split('\n');
-        expect(colorizeLines(input), ['\x1b[48;5;8mHello\x1b[49m', '\x1b[48;5;8mHi\x1b[0m', 'Howdy']);
+        expect(colorizeLines(input),
+            ['\x1b[48;5;8mHello\x1b[49m', '\x1b[48;5;8mHi\x1b[0m', 'Howdy']);
       });
 
       test('handles CJK chars', () {

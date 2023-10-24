@@ -11,7 +11,10 @@ void main() {
         columnWidths: [7, 9],
       );
 
-      table.add([chalk.keyword('red')('Hello how are you?'), chalk.keyword('blue')('I am fine thanks!')]);
+      table.add([
+        chalk.keyword('red')('Hello how are you?'),
+        chalk.keyword('blue')('I am fine thanks!')
+      ]);
 
       final expected = [
         '┌───────┬─────────┐',
@@ -25,7 +28,9 @@ void main() {
       expect(table.toString(), expected.join('\n'));
     });
 
-    test('allows numbers as `content` property of cells defined using object notation', () {
+    test(
+        'allows numbers as `content` property of cells defined using object notation',
+        () {
       var table = Table(
         style: TableStyle.noColor(),
       );
@@ -55,7 +60,8 @@ void main() {
     });
 
     test('works with CJK values', () {
-      final table = Table(style: TableStyle.noColor(), columnWidths: [5, 10, 5]);
+      final table =
+          Table(style: TableStyle.noColor(), columnWidths: [5, 10, 5]);
 
       table.addAll([
         ['foobar', 'English test', 'baz'],

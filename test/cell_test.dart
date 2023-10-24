@@ -77,7 +77,11 @@ void main() {
         late Cell cell;
 
         initCell({wordWrap, wrapOnWordBoundary}) {
-          cell = Cell({'content': 'some text', 'wordWrap': wordWrap, 'wrapOnWordBoundary': wrapOnWordBoundary});
+          cell = Cell({
+            'content': 'some text',
+            'wordWrap': wordWrap,
+            'wrapOnWordBoundary': wrapOnWordBoundary
+          });
           cell['x'] = cell['y'] = 0;
         }
 
@@ -90,15 +94,20 @@ void main() {
         });
 
         test('no cell wordWrap override (tableOptions.wordWrap=true)', () {
-          tableOptions['wordWrap'] = true; // wrapOnWordBoundary is true by default
+          tableOptions['wordWrap'] =
+              true; // wrapOnWordBoundary is true by default
           initCell();
 
           cell.mergeTableOptions(tableOptions);
-          expect(mockWordWrap.toHaveBeenCalledWith(isA<int>(), equals(cell['content']), isTrue), isTrue);
+          expect(
+              mockWordWrap.toHaveBeenCalledWith(
+                  isA<int>(), equals(cell['content']), isTrue),
+              isTrue);
         });
 
         test('no cell wordWrap override (tableOptions.wordWrap=false)', () {
-          tableOptions['wordWrap'] = false; // wrapOnWordBoundary is true by default
+          tableOptions['wordWrap'] =
+              false; // wrapOnWordBoundary is true by default
           initCell();
 
           cell.mergeTableOptions(tableOptions);
@@ -106,7 +115,8 @@ void main() {
         });
 
         test('cell wordWrap override (cell.options.wordWrap=false)', () {
-          tableOptions['wordWrap'] = true; // wrapOnWordBoundary is true by default
+          tableOptions['wordWrap'] =
+              true; // wrapOnWordBoundary is true by default
           initCell(wordWrap: false);
 
           cell.mergeTableOptions(tableOptions);
@@ -114,29 +124,39 @@ void main() {
         });
 
         test('cell wordWrap override (cell.options.wordWrap=true)', () {
-          tableOptions['wordWrap'] = false; // wrapOnWordBoundary is true by default
+          tableOptions['wordWrap'] =
+              false; // wrapOnWordBoundary is true by default
           initCell(wordWrap: true);
 
           cell.mergeTableOptions(tableOptions);
           expect(mockWordWrap.called(1), isTrue);
         });
 
-        test('cell wrapOnWordBoundary override (cell.options.wrapOnWordBoundary=false)', () {
-          tableOptions['wordWrap'] = true; // wrapOnWordBoundary is true by default
+        test(
+            'cell wrapOnWordBoundary override (cell.options.wrapOnWordBoundary=false)',
+            () {
+          tableOptions['wordWrap'] =
+              true; // wrapOnWordBoundary is true by default
           initCell(wrapOnWordBoundary: false);
 
           cell.mergeTableOptions(tableOptions);
-          expect(mockWordWrap.toHaveBeenCalledWith(isA<int>(), equals(cell['content']), isFalse), isTrue);
+          expect(
+              mockWordWrap.toHaveBeenCalledWith(
+                  isA<int>(), equals(cell['content']), isFalse),
+              isTrue);
         });
 
-        test('cell wrapOnWordBoundary override (cell.options.wrapOnWordBoundary=true)', () {
+        test(
+            'cell wrapOnWordBoundary override (cell.options.wrapOnWordBoundary=true)',
+            () {
           tableOptions['wordWrap'] = true;
           tableOptions['wrapOnWordBoundary'] = false;
           initCell(wrapOnWordBoundary: true);
 
           cell.mergeTableOptions(tableOptions);
           expect(
-              mockWordWrap.toHaveBeenCalledWith(isA<int>(), equals(cell['content']), isTrue /*wrapOnWordBoundary*/
+              mockWordWrap.toHaveBeenCalledWith(isA<int>(),
+                  equals(cell['content']), isTrue /*wrapOnWordBoundary*/
                   ),
               isTrue);
         });
@@ -459,7 +479,9 @@ void main() {
           expect(cell['width'], 32);
         });
 
-        test('will use multiple columns for wordWrap text when using colSpan and wordWrap together', () {
+        test(
+            'will use multiple columns for wordWrap text when using colSpan and wordWrap together',
+            () {
           var tableOptions = defaultOptions();
           tableOptions['colWidths'] = [7, 7, 17];
           tableOptions['wordWrap'] = true;
@@ -487,7 +509,9 @@ void main() {
           expect(cell['lines'][0], contains('fox'));
         });
 
-        test('will only use one column for wordWrap text when not using colSpan', () {
+        test(
+            'will only use one column for wordWrap text when not using colSpan',
+            () {
           var tableOptions = defaultOptions();
           tableOptions['colWidths'] = [7, 7, 7];
           tableOptions['wordWrap'] = true;
@@ -709,11 +733,15 @@ void main() {
           cell['border'] = ['gray'];
           cell['head'] = ['red'];
           var empty = cell.drawEmpty();
-          var expected = chalk.keyword('gray')('L') + chalk.keyword('red')('       ');
+          var expected =
+              chalk.keyword('gray')('L') + chalk.keyword('red')('       ');
           expect(empty, expected);
 
-          expect(cell.drawEmpty(true),
-              chalk.keyword('gray')('L') + chalk.keyword('red')('       ') + chalk.keyword('gray')('R'));
+          expect(
+              cell.drawEmpty(true),
+              chalk.keyword('gray')('L') +
+                  chalk.keyword('red')('       ') +
+                  chalk.keyword('gray')('R'));
         });
       });
 
@@ -757,7 +785,8 @@ void main() {
           cell['x'] = 0;
           expect(cell.draw(0), "${chalk.keyword('gray')("L")}  hello  ");
           cell['drawRight'] = true;
-          expect(cell.draw(0), "${chalk.keyword('gray')("L")}  hello  ${chalk.keyword('gray')("R")}");
+          expect(cell.draw(0),
+              "${chalk.keyword('gray')("L")}  hello  ${chalk.keyword('gray')("R")}");
         });
 
         test('text will be drawn in color of head style if y == 0', () {
@@ -780,10 +809,14 @@ void main() {
           cell['border'] = ['gray'];
           cell['head'] = ['red'];
           cell['x'] = cell['y'] = 0;
-          expect(cell.draw(0), chalk.keyword('gray')('L') + chalk.keyword('red')('  hello  '));
-          cell['drawRight'] = true;
           expect(cell.draw(0),
-              chalk.keyword('gray')('L') + chalk.keyword('red')('  hello  ') + chalk.keyword('gray')('R'));
+              chalk.keyword('gray')('L') + chalk.keyword('red')('  hello  '));
+          cell['drawRight'] = true;
+          expect(
+              cell.draw(0),
+              chalk.keyword('gray')('L') +
+                  chalk.keyword('red')('  hello  ') +
+                  chalk.keyword('gray')('R'));
         });
       });
 
@@ -938,7 +971,8 @@ void main() {
         });
       });
 
-      test('vertically truncated will show truncation on last visible line', () {
+      test('vertically truncated will show truncation on last visible line',
+          () {
         cell['height'] = 2;
         expect(cell.draw(0), 'L hello ');
         expect(cell.draw(1), 'L howd… ');

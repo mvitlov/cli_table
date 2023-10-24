@@ -2,7 +2,9 @@ import 'package:string_width/string_width.dart';
 
 /// Match ANSI escape codes with or without capturing them
 RegExp _codeRegex([bool capture = false]) {
-  return capture ? RegExp(r'\u001b\[((?:\d*;){0,5}\d*)m') : RegExp(r'\u001b\[(?:\d*;){0,5}\d*m');
+  return capture
+      ? RegExp(r'\u001b\[((?:\d*;){0,5}\d*)m')
+      : RegExp(r'\u001b\[(?:\d*;){0,5}\d*m');
 }
 
 /// Calculates length of the given string
@@ -35,7 +37,8 @@ String pad(String string, int len, String padCharacter, String? direction) {
         {
           var right = (padlen / 2).ceil();
           var left = padlen - right;
-          string = repeat(padCharacter, left) + string + repeat(padCharacter, right);
+          string =
+              repeat(padCharacter, left) + string + repeat(padCharacter, right);
           break;
         }
       default:
@@ -71,12 +74,16 @@ void _cache() {
 
 void _updateState(Map<String, dynamic> state, RegExpMatch controlChars) {
   if (!cacheInit) _cache();
-  var controlCode = controlChars[1] != null && controlChars[1] != '' ? int.parse(controlChars[1]!.split(';')[0]) : 0;
-  if ((controlCode >= 30 && controlCode <= 39) || (controlCode >= 90 && controlCode <= 97)) {
+  var controlCode = controlChars[1] != null && controlChars[1] != ''
+      ? int.parse(controlChars[1]!.split(';')[0])
+      : 0;
+  if ((controlCode >= 30 && controlCode <= 39) ||
+      (controlCode >= 90 && controlCode <= 97)) {
     state['lastForegroundAdded'] = controlChars[0];
     return;
   }
-  if ((controlCode >= 40 && controlCode <= 49) || (controlCode >= 100 && controlCode <= 107)) {
+  if ((controlCode >= 40 && controlCode <= 49) ||
+      (controlCode >= 100 && controlCode <= 107)) {
     state['lastBackgroundAdded'] = controlChars[0];
     return;
   }
@@ -254,7 +261,8 @@ Map<String, dynamic> _defaultOptions() {
 }
 
 /// Helper method for producing valid options from user input & Table defaults
-Map<String, dynamic> mergeOptions([Map<String, dynamic>? options, Map<String, dynamic>? defaults]) {
+Map<String, dynamic> mergeOptions(
+    [Map<String, dynamic>? options, Map<String, dynamic>? defaults]) {
   options ??= {};
   defaults ??= _defaultOptions();
   var ret = {...defaults, ...options};
@@ -316,7 +324,8 @@ List<String> _textWrap(int maxLength, String input) {
   return lines;
 }
 
-List<String> multiLineWordWrap(int maxLength, String string, [bool wrapOnWordBoundary = true]) {
+List<String> multiLineWordWrap(int maxLength, String string,
+    [bool wrapOnWordBoundary = true]) {
   var output = <String>[];
   var input = string.split('\n');
   final handler = wrapOnWordBoundary ? _wordWrap : _textWrap;
@@ -369,5 +378,6 @@ extension RegExpExtension on RegExp {
 }
 
 extension StringExtension on String {
-  List<String> splitWithDelim(RegExp pattern) => pattern.allMatchesWithSep(this);
+  List<String> splitWithDelim(RegExp pattern) =>
+      pattern.allMatchesWithSep(this);
 }

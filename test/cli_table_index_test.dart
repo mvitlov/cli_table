@@ -129,15 +129,18 @@ void main() {
       ];*/
 
       final expected = [
-        chalk.keyword('gray')('┌──────') + chalk.keyword('gray')('┬──────────────────┐'),
+        chalk.keyword('gray')('┌──────') +
+            chalk.keyword('gray')('┬──────────────────┐'),
         chalk.keyword('gray')('│') +
             chalk.keyword('red')(' Rel  ') +
             chalk.keyword('gray')('│') +
             chalk.keyword('red')(' By               ') +
             chalk.keyword('gray')('│'),
-        chalk.keyword('gray')('├──────') + chalk.keyword('gray')('┼──────────────────┤'),
+        chalk.keyword('gray')('├──────') +
+            chalk.keyword('gray')('┼──────────────────┤'),
         '${chalk.keyword('gray')('│')} ${chalk.keyword('orange')('v0.1')} ${chalk.keyword('gray')('│')} rauchg@gmail.com ${chalk.keyword('gray')('│')}',
-        chalk.keyword('gray')('└──────') + chalk.keyword('gray')('┴──────────────────┘'),
+        chalk.keyword('gray')('└──────') +
+            chalk.keyword('gray')('┴──────────────────┘'),
       ];
 
       expect(table.toString(), expected.join('\n'));
