@@ -1,6 +1,6 @@
 > A Dart package that enhances the user experience by displaying _static_ tabular data in terminal.
 
-![cli_table_preview1](https://raw.githubusercontent.com/mvitlov/cli_table/1.0.0/media/screenshot.png)
+![cli_table_preview1](https://raw.githubusercontent.com/mvitlov/cli_table/main/media/screenshot.png)
 
 ## Features
 
@@ -16,7 +16,7 @@
 - Word wrapping options
 - Per cell customization
 
-![cli_table_preview2](https://raw.githubusercontent.com/mvitlov/cli_table/1.0.0/media/screenshot2.png)
+![cli_table_preview2](https://raw.githubusercontent.com/mvitlov/cli_table/main/media/screenshot2.png)
 
 ## Basic example
 
