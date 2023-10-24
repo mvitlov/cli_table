@@ -1,6 +1,6 @@
 name: cli_table
 description: A Dart package that enhances the user experience by displaying static tabular data in terminal.
-version: 1.0.1
+version: 1.0.2
 repository: https://github.com/mvitlov/cli_table
 issue_tracker: https://github.com/mvitlov/cli_table/issues?q=is%3Aissue+is%3Aopen+
 homepage: https://marinvitlov.com
